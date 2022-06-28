@@ -1,11 +1,12 @@
+from random import sample
 from application import db
-from application.models import Warframe
+from application.db.app import customer
 
 db.drop_all()
 db.create_all()
-sample_todo = Warframe(
-    task = "Sample tenno",
-    completed = False
+sample_char=customer(
+    task="sample customer",
+    completed= False
 )
-db.session.add(sample_todo)
+db.session.add(sample_char)
 db.session.commit()
