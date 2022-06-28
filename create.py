@@ -1,13 +1,6 @@
 from random import sample
 from application import db
-from application.db.app import Customer
-
+from application.models import Customer,Tenno
 db.drop_all()
 db.create_all()
-sample_char=Customer(
-    task="sample customer",
-    completed= False
-)
-db.session.add(sample_char)
-db.session.commit()
 
