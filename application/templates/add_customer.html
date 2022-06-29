@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block body %}
+<title>Customer Setup page</title>
+<div class="form">
+
+    <form method="POST", action="">
+        {{ form.hidden_tag() }}
+        {{ form.first_name.label }} {{ form.first_name }}
+        <br>
+        {{ form.last_name.label }} {{ form.last_name }}
+        <br>
+        {{ form.username.label }} {{ form.username }}
+        <br>
+        {{ form.password.label }} {{ form.password }}
+        <br>
+        {{ form.card_details.label }} {{ form.card_details }}
+        <br>
+        {{ form.membership.label }} {{ form.membership }}
+        <br>
+        {{ form.submit }}
+        <br>
+        {{message}}
+    </form>
+</div>
+
+{% endblock body %}

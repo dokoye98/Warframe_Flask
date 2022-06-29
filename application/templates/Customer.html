@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block body %}
+<br>
+{% for c in customer %}
+<p>First Name: {{ c.first_name }} </p>
+<p>Last Name: {{ c.last_name }}</p>
+<p>Username: {{ c.username }}</p>
+<p>Password: {{ c.password }}</p>
+<p>Card details: {{ c.card_details }}</p>
+<p>Membership: {{ c.membership }}</p>
+{% endfor %}
+{% endblock body %}
