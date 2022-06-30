@@ -16,49 +16,60 @@ def about():
 @app.route('/')
 def customers():
     customer = Customer.query.all()
-    return render_template("Customer.html", customer=customer)
+    return render_template("Customer.html", Customer=customer)
 
 @app.route('/TENNO')
 def tenno():
     tenno = Tenno.query.all()
-    return render_template("Tenno.html", tenno=Tenno)
+    return render_template("Tenno.html", Tenno=tenno)
 
 
 @app.route('/add_customer', methods = ['GET','POST'])
 def add_customer():
     form = Customerform()
-    if form.validate_on_submit():
-        customerData = Customer(
-            first_name = form.first_name.data,
-            last_name = form.last_name.data,
-            username=form.username.data,
-            password=form.password.data,
-            card_details=form.card_details.data,
-            membership=form.membership.data
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            customerData = Customer(
+                first_name = form.first_name.data,
+                last_name = form.last_name.data,
+                username=form.username.data,
+                password=form.password.data,
+                card_details=form.card_details.data,
+                membership=form.membership.data
             )
-        db.session.add(customerData)
-        db.session.commit()
-        return redirect(url_for('customers'))
+            db.session.add(customerData)
+            db.session.commit()
+            return redirect(url_for('customers'))
     return render_template('add_customer.html', form=form)
 
 @app.route('/update_customer/<int:id>', methods= ['GET', 'POST'])
-def update(id):
+def update_customer(id):
     form = Customerform()
     customer = Customer.query.get(id)
     if form.validate_on_submit():
-        todo.task = form.task.data
+        Customer.first_name = form.first_name.data,
+        Customer.last_name=form.last_name.data,
+        Customer.username=form.username.data,
+        Customer.password=form.password.data,
+        Customer.card_details=form.card_details.data,
+        Customer.membership=form.membership.data
         db.session.commit()
-        return redirect(url_for('index'))
+        return redirect(url_for('customers'))
     elif request.method == 'GET':
-        form.task.data = todo.task
-    return render_template('update.html', form=form)
+        form.first_name.data = Customer.first_name,
+        form.last_name.data =Customer.last_name,
+        form.username.data=Customer.username,
+        form.password.data=Customer.password,
+        form.card_details.data=Customer.card_details,
+        form.membership.data=Customer.membership
+    return render_template('update_customer.html', form=form)
 
-@app.route('/delete/<int:id>')
-def delete(id):
-    todo = ToDos.query.get(id)
-    db.session.delete(todo)
+@app.route('/delete_customer/<int:id>')
+def delete_customer(id):
+    customer = Customer.query.get(id)
+    db.session.delete(customer)
     db.session.commit()
-    return redirect(url_for('index'))
+    return redirect(url_for('customers'))
 
 
 

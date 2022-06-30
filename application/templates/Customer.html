@@ -8,5 +8,11 @@
 <p>Password: {{ c.password }}</p>
 <p>Card details: {{ c.card_details }}</p>
 <p>Membership: {{ c.membership }}</p>
+<form action="{{ url_for('delete_customer', id=customer.id) }}">
+<button type="Submit">Delete Customer</button>
+</form>
+<form action="{{ url_for('update_customer', id=customer.id) }}">
+    <button type="Submit">Update Customer</button>
+</form>
 {% endfor %}
 {% endblock body %}
