@@ -13,10 +13,10 @@ from flask import redirect, url_for, render_template,request
 def about():
     return render_template("about.html")
 
-@app.route('/')
+@app.route('/',methods=['GET'])
 def customers():
     customer = Customer.query.all()
-    return render_template("Customer.html", Customer=customer)
+    return render_template("Customer.html", customer=customer)
 
 @app.route('/TENNO')
 def tenno():
@@ -47,21 +47,21 @@ def update_customer(id):
     form = Customerform()
     customer = Customer.query.get(id)
     if form.validate_on_submit():
-        Customer.first_name = form.first_name.data,
-        Customer.last_name=form.last_name.data,
-        Customer.username=form.username.data,
-        Customer.password=form.password.data,
-        Customer.card_details=form.card_details.data,
-        Customer.membership=form.membership.data
+        customer.first_name = form.first_name.data,
+        customer.last_name=form.last_name.data,
+        customer.username=form.username.data,
+        customer.password=form.password.data,
+        customer.card_details=form.card_details.data,
+        customer.membership=form.membership.data
         db.session.commit()
         return redirect(url_for('customers'))
     elif request.method == 'GET':
-        form.first_name.data = Customer.first_name,
-        form.last_name.data =Customer.last_name,
-        form.username.data=Customer.username,
-        form.password.data=Customer.password,
-        form.card_details.data=Customer.card_details,
-        form.membership.data=Customer.membership
+        form.first_name.data = customer.first_name,
+        form.last_name.data =customer.last_name,
+        form.username.data=customer.username,
+        form.password.data=customer.password,
+        form.card_details.data=customer.card_details,
+        form.membership.data=customer.membership
     return render_template('update_customer.html', form=form)
 
 @app.route('/delete_customer/<int:id>')
@@ -93,6 +93,32 @@ def add_tenno():
         db.session.commit()
         return redirect(url_for('tenno'))
     return render_template('add_tenno.html', form=form)
+
+
+@app.route('/update_tenno/<int:id>', methods= ['GET', 'POST'])
+def update_tenno(id):
+    form = Tennoform()
+    tenno = Tenno.query.get(id)
+    if form.validate_on_submit():
+        tenno.warframe = form.warframe.data,
+        tenno.health = form.health.data,
+        tenno.mp=form.mp.data,
+        tenno.prime=form.prime.data,
+        db.session.commit()
+        return redirect(url_for('tenno'))
+    elif request.method == 'GET':
+        form.warframe.data = tenno.warframe,
+        form.health.data =tenno.health,
+        form.mp.data=tenno.mp,
+        form.prime.data=tenno.prime
+    return render_template('update_customer.html', form=form)
+
+@app.route('/delete_tenno/<int:id>')
+def delete_tenno(id):
+    tenno = Tenno.query.get(id)
+    db.session.delete(tenno)
+    db.session.commit()
+    return redirect(url_for('tenno'))
 
 
 # @app.route('/add/tenno')

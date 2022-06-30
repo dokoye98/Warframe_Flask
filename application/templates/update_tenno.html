@@ -5,17 +5,13 @@
 
     <form method="POST", action="">
         {{ form.hidden_tag() }}
-        {{ form.first_name.label }} {{ form.first_name }}
+        {{ form.warframe.label }} {{ form.warframe}}
         <br>
-        {{ form.last_name.label }} {{ form.last_name }}
+        {{ form.health.label }} {{ form.health }}
         <br>
-        {{ form.username.label }} {{ form.username }}
+        {{ form.mp.label }} {{ form.mp }}
         <br>
-        {{ form.password.label }} {{ form.password }}
-        <br>
-        {{ form.card_details.label }} {{ form.card_details }}
-        <br>
-        {{ form.membership.label }} {{ form.membership }}
+        {{ form.prime.label }} {{ form.prime }}
         <br>
         {{ form.submit }}
     </form>

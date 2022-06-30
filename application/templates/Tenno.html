@@ -6,17 +6,11 @@
 <p>Health: {{ t.health}}</p>
 <p>Magic Points: {{ t.mp }}</p>
 <p>Prime: {{ t.prime }}</p>
-<!-- <form action="{{ url_for('delete', id=todo.id) }}">
-<button type="Submit">Delete Task</button>
+<form action="{{ url_for('delete_tenno', id=t.char_id) }}">
+<button type="Submit">Delete Tenno</button>
 </form>
-<form action="{{ url_for('complete', id=todo.id) }}">
-<button type="Submit">Complete Task</button>
+<form action="{{ url_for('update_tenno', id=t.char_id) }}">
+<button type="Submit">Update tenno</button>
 </form>
-<form action="{{ url_for('incomplete', id=todo.id) }}">
-<button type="Submit">Incomplete Task</button>
-</form>
-<form action="{{ url_for('update', id=todo.id) }}">
-<button type="Submit">Update Task</button>
-</form> -->
 {% endfor %}
 {% endblock body %}

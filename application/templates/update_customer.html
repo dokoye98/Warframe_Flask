@@ -3,19 +3,19 @@
 
 <div class="form">
 
-    <form method="POST", action="">
+    <form method="POST", action=''>
         {{ form.hidden_tag() }}
-        {{ form.first_name.label }} {{ form.first_name }}
+       <p>{{ form.first_name.label }} {{ form.first_name }}</p> 
         <br>
-        {{ form.last_name.label }} {{ form.last_name }}
+        <p>{{ form.last_name.label }} {{ form.last_name }}</p>
         <br>
-        {{ form.username.label }} {{ form.username }}
+        <p>{{ form.username.label }} {{ form.username }}</p>
         <br>
-        {{ form.password.label }} {{ form.password }}
+        <p>{{ form.password.label }} {{ form.password }} </p>
         <br>
-        {{ form.card_details.label }} {{ form.card_details }}
+        <p>{{ form.card_details.label }} {{ form.card_details }} </p>
         <br>
-        {{ form.membership.label }} {{ form.membership }}
+       <p>{{ form.membership.label }} {{ form.membership }}</p> 
         <br>
         {{ form.submit }}
     </form>
