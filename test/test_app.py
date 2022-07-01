@@ -22,7 +22,12 @@ class TestBase(TestCase):
         custom1=Customer(first_name='slimes',last_name='1231',username='1231',password='sdasa',card_details='1231',membership=False)
         db.session.add(custom1)
         db.session.commit()
-    
+    def setUp_tenno(self):
+        db.create_all()
+        tenno1=Tenno(warframe='slime',health=12313,mp=213321,prime=False)
+        db.session.add(tenno1)
+        db.session.commit()
+
     def tearDown(self):
         db.session.remove()
         db.drop_all()
@@ -44,17 +49,20 @@ class TestAdd(TestBase):
         # after Chewbarka in the setUp() method
         assert Customer.query.filter_by(first_name='qda').first().id == 2
 
-
 class TestDelete(TestBase):
     def test_delete_customer(self):
-        # delete Chewbarka from the database
         response = self.client.delete(
             url_for('delete_customer'),
             data = dict(first_name='qda',last_name='1231',username='1231',password='sdasa',card_details='1231',membership=False)
         )
-        # query the dog table - if Chewbarka has been deleted,
-        # the query should return an empty list
         assert len(Customer.query.all()) == 0
+class TestDeleteTenno(TestBase):
+    def test_delete_tenno(self):
+        response = self.client.delete(
+            url_for('delete_tenno'),
+            data = dict(warframe='sasd',health=123,mp=1231,prime=True)
+        )
+        assert len(Tenno.query.all()) == 0
 
 class TestViews(TestBase):
     def test_view_customer(self):
@@ -70,5 +78,17 @@ class Testupdate(TestBase):
             )
         assert len(Customer.query.all()) == 1
         assert Customer.query.filter_by(first_name= 'qdas')
+
+class TestupdateTenno(TestBase):
+    def test_update_tenno(self):
+        respone = self.client.post(
+            url_for('update_tenno', id=1),
+            data = dict(warframe='sasd',
+            health=123,
+            mp=1231,
+            prime=True)
+            )
+        assert len(Customer.query.all()) == 1
+        assert Customer.query.filter_by(warframe='sasd')
 
         
