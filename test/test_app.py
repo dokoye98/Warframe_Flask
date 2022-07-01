@@ -19,6 +19,7 @@ class TestBase(TestCase):
 
     def setUp_customer(self):
         db.create_all()
+        
         custom1=Customer(first_name='slimes',last_name='1231',username='1231',password='sdasa',card_details='1231',membership=False)
         db.session.add(custom1)
         db.session.commit()
@@ -45,8 +46,6 @@ class TestAdd(TestBase):
                 membership=False
             )
         )
-        # as it's the second dog that's been added to the database
-        # after Chewbarka in the setUp() method
         assert Customer.query.filter_by(first_name='qda').first().id == 2
 
 class TestDelete(TestBase):
