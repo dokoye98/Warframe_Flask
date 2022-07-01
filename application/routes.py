@@ -23,7 +23,6 @@ def tenno():
     tenno = Tenno.query.all()
     return render_template("Tenno.html", Tenno=tenno)
 
-
 @app.route('/add_customer', methods = ['GET','POST'])
 def add_customer():
     form = Customerform()
@@ -47,20 +46,20 @@ def update_customer(id):
     form = Customerform()
     customer = Customer.query.get(id)
     if form.validate_on_submit():
-        customer.first_name = form.first_name.data,
-        customer.last_name=form.last_name.data,
-        customer.username=form.username.data,
-        customer.password=form.password.data,
-        customer.card_details=form.card_details.data,
+        customer.first_name = form.first_name.data
+        customer.last_name=form.last_name.data
+        customer.username=form.username.data
+        customer.password=form.password.data
+        customer.card_details=form.card_details.data
         customer.membership=form.membership.data
         db.session.commit()
         return redirect(url_for('customers'))
     elif request.method == 'GET':
-        form.first_name.data = customer.first_name,
-        form.last_name.data =customer.last_name,
-        form.username.data=customer.username,
-        form.password.data=customer.password,
-        form.card_details.data=customer.card_details,
+        form.first_name.data = customer.first_name
+        form.last_name.data =customer.last_name
+        form.username.data=customer.username
+        form.password.data=customer.password
+        form.card_details.data=customer.card_details
         form.membership.data=customer.membership
     return render_template('update_customer.html', form=form)
 
@@ -100,18 +99,18 @@ def update_tenno(id):
     form = Tennoform()
     tenno = Tenno.query.get(id)
     if form.validate_on_submit():
-        tenno.warframe = form.warframe.data,
-        tenno.health = form.health.data,
-        tenno.mp=form.mp.data,
-        tenno.prime=form.prime.data,
+        tenno.warframe = form.warframe.data
+        tenno.health = form.health.data
+        tenno.mp=form.mp.data
+        tenno.prime=form.prime.data
         db.session.commit()
         return redirect(url_for('tenno'))
     elif request.method == 'GET':
-        form.warframe.data = tenno.warframe,
-        form.health.data =tenno.health,
-        form.mp.data=tenno.mp,
+        form.warframe.data = tenno.warframe
+        form.health.data =tenno.health
+        form.mp.data=tenno.mp
         form.prime.data=tenno.prime
-    return render_template('update_customer.html', form=form)
+    return render_template('update_tenno.html', form=form)
 
 @app.route('/delete_tenno/<int:id>')
 def delete_tenno(id):
