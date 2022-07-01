@@ -1,14 +1,11 @@
-
-
 from flask_testing import TestCase
-from application import app
+from application import app,db,models
 from flask import redirect, url_for, render_template,request
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm 
 from wtforms import StringField, SubmitField
 from application import __init__,routes,models
 from application.models import Customer,Tenno
-from application import app
 
 class TestBase(TestCase):
 
@@ -35,8 +32,13 @@ class TestAdd(TestBase):
         # add a new customer to the database
         response = self.client.post(
             url_for('add_customer'),
-            data = dict(first_name='qda',last_name='1231',username='1231',password='sdasa',card_details='1231',membership=False)
-
+            data = dict(first_name='qda',
+                last_name='1231',
+                username='1231',
+                password='sdasa',
+                card_details='1231',
+                membership=False
+            )
         )
         # as it's the second dog that's been added to the database
         # after Chewbarka in the setUp() method
@@ -53,3 +55,20 @@ class TestDelete(TestBase):
         # query the dog table - if Chewbarka has been deleted,
         # the query should return an empty list
         assert len(Customer.query.all()) == 0
+
+class TestViews(TestBase):
+    def test_view_customer(self):
+        response = self.client.get(url_for('about')) # send a GET request
+        self.assertEqual(response.status_code, 200) # assert that the response code is 200
+        self.assertIn(b'This is the about here you can create an account and character or "Tenno" page', response.data)   
+
+class Testupdate(TestBase):
+    def test_update_customer(self):
+        respone = self.client.post(
+            url_for('update_customer', id=1),
+            data = dict(first_name='qdas',last_name='1231',username='1231',password='sdasa',card_details='1231',membership=False)
+            )
+        assert len(Customer.query.all()) == 1
+        assert Customer.query.filter_by(first_name= 'qdas')
+
+        
