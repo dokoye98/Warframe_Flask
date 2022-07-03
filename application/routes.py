@@ -69,15 +69,7 @@ def delete_customer(id):
     db.session.delete(customer)
     db.session.commit()
     return redirect(url_for('customers'))
-
-
-
-
-
-
-
-
-
+    
 @app.route('/add_tenno', methods = ['GET','POST'])
 def add_tenno():
     form = Tennoform()
