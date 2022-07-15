@@ -116,7 +116,7 @@ class TestUpdateCustomer(TestBase):
         )
         self.assertIn(b'qdasda', response.data)
 
-class TestupdateTenno(TestBase):
+class TestUpdateTenno(TestBase):
     def test_update_tenno(self):
         response = self.client.post(
             'updatetenno/1',
