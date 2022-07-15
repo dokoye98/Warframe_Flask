@@ -1,0 +1,11 @@
+<html>
+    <body>
+        <a href="{{ url_for('customers') }}">Customer</a>
+        <a href="{{ url_for('add_customer') }}">Add Customer</a>
+        <a href="{{ url_for('tenno') }}">Tenno</a>
+        <a href="{{ url_for('about') }}">About</a>
+        <a href="{{ url_for('add_tenno') }}">Add Tenno</a>
+        {% block body %}
+        {% endblock body %}
+    </body>
+</html>

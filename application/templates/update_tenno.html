@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<div class="form">
+
+    <form method="POST", action="">
+        {{ form.hidden_tag() }}
+        {{ form.warframe.label }} {{ form.warframe}}
+        <br>
+        {{ form.health.label }} {{ form.health }}
+        <br>
+        {{ form.mp.label }} {{ form.mp }}
+        <br>
+        {{ form.prime.label }} {{ form.prime }}
+        <br>
+        {{ form.submit }}
+    </form>
+</div>
+
+{% endblock body %}
