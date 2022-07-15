@@ -1,18 +1,13 @@
+from application import models, db, app
+from application.models import Tenno, Customer
 from flask_testing import TestCase
-from flask import redirect, url_for, render_template,request
-from flask_sqlalchemy import SQLAlchemy
-from flask_wtf import FlaskForm 
-from wtforms import StringField, SubmitField
-from application import routes
-from application.models import Customer,Tenno
-from application.__init__ import app,db
-import os
+from flask import url_for
 
 class TestBase(TestCase):
     def create_app(self):
 
-        app.config.update(SQLALCHEMY_DATABASE_URI="sqlite:///db",
-                SECRET_KEY='2009oo',
+        app.config.update(SQLALCHEMY_DATABASE_URI="sqlite:///test.db",
+                SECRET_KEY='TEST_SECRET_KEY',
                 DEBUG=True,
                 WTF_CSRF_ENABLED=False
                 )
@@ -104,7 +99,7 @@ class TestAddtenno(TestBase):
             prime=True)
         )
         
-        assert Tenno.query.filter_by(warframe='sasd').first().id == 2
+        assert Tenno.query.filter_by(warframe='sasd').first().char_id == 2
 
 class TestUpdateCustomer(TestBase):
     def test_update_customer(self):
@@ -121,7 +116,7 @@ class TestUpdateCustomer(TestBase):
         )
         self.assertIn(b'qdasda', response.data)
 
-class TestUpdateParty(TestBase):
+class TestupdateTenno(TestBase):
     def test_update_tenno(self):
         response = self.client.post(
             'updatetenno/1',
